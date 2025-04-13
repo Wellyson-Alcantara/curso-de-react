@@ -10,7 +10,7 @@ function AddTask({ onAddTaskSubmit }) {
                 placeholder="Digite o titulo da tarefa" 
                 className="border border-slate-300 outline-slate-400 px-4 py-2 rounded-md"
                 value={title}
-                onChange={(event) => setTitle(event.target.velue)}
+                onChange={(event) => setTitle(event.target.value)}
             />
             <input 
                 type="text" 
@@ -18,7 +18,18 @@ function AddTask({ onAddTaskSubmit }) {
                 value={description}
                 onChange={(event) => setDescription(event.target.value)}
             />
-            <button className="bg-slate-500 text-white px-4 py-2 rounded-md">
+            <button 
+                onClick={() => {
+                    // Verificar se o titulo e a descrição estão preenchidos.
+                    if (!title.trim() || !description.trim()) {
+                        return alert("Preencha o título e a descrição da tarefa!");
+                    }
+                    onAddTaskSubmit(title, description);
+                    setTitle("");
+                    setDescription("");
+                }} 
+                className="bg-slate-500 text-white px-4 py-2 rounded-md"
+            >
                 Adicionar
             </button>
         </div>
